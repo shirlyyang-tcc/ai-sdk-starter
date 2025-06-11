@@ -38,7 +38,7 @@ export async function onRequest(context) {
     // return new Response(JSON.stringify({ text: '123' }));
   } catch (error) {
     console.log("Chat API Error:", error);
-    return new Response(JSON.stringify({ error: "Internal Server Error", message: error }), {
+    return new Response(JSON.stringify({ error: "Internal Server Error", message: error.message }), {
       status: 500,
       headers: {
         "content-type": "application/json",
