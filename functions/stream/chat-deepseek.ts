@@ -4,13 +4,11 @@ import "../utils/text-stream";
 
 export async function onRequest(context) {
   try {
-    console.log("00000");
 
     // const { messages } = await context.request.json()
     const deepseek = createDeepSeek({
       apiKey: context.env.DEEPSEEK_API_KEY,
     });
-    console.log("11111");
     let result;
     try {
       result = await streamText({
@@ -29,7 +27,7 @@ export async function onRequest(context) {
       console.log("++++++stream error", e);
     }
     const textStream = result.textStream;
-    console.log("2222222", textStream);
+    console.log("check result stream", textStream);
 
    
     return new Response(textStream, {
@@ -40,7 +38,7 @@ export async function onRequest(context) {
     // return new Response(JSON.stringify({ text: '123' }));
   } catch (error) {
     console.log("Chat API Error:", error);
-    return new Response(JSON.stringify({ error: "Internal Server Error" }), {
+    return new Response(JSON.stringify({ error: "Internal Server Error", message: error }), {
       status: 500,
       headers: {
         "content-type": "application/json",
