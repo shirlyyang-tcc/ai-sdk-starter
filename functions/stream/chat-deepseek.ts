@@ -4,8 +4,7 @@ import "../utils/text-stream";
 
 export async function onRequest(context) {
   try {
-
-    // const { messages } = await context.request.json()
+    // const { messages } = await context.request.json()  
     const deepseek = createDeepSeek({
       apiKey: context.env.DEEPSEEK_API_KEY,
     });
@@ -38,11 +37,18 @@ export async function onRequest(context) {
     // return new Response(JSON.stringify({ text: '123' }));
   } catch (error) {
     console.log("Chat API Error:", error);
-    return new Response(JSON.stringify({ error: "Internal Server Error", message: error.message }), {
-      status: 500,
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+    return new Response(
+      JSON.stringify({
+        error: "Internal Server Error",
+        message: error.message,
+        apiKey: context.env.DEEPSEEK_API_KEY,
+      }),
+      {
+        status: 500,
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
   }
 }
