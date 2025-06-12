@@ -21,6 +21,9 @@ export async function onRequest(context) {
         onError({ error }) {
           console.log("inner stream error", error); // your error logging logic here
         },
+      }).catch((e) => {
+        console.log("++++++stream error", e);
+        throw e;
       });
     } catch (e) {
       console.log("++++++stream error", e);
