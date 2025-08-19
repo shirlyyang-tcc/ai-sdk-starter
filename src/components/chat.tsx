@@ -53,11 +53,11 @@ export function Chat() {
                 }`}
               >
                 {message.content}
-                {message.reasoning && (
+                {/* {message.reasoning && (
                   <pre className="mt-2 text-sm opacity-70 whitespace-pre-wrap">
                     {message.reasoning}
                   </pre>
-                )}
+                )} */}
               </div>
             </div>
           ))}
