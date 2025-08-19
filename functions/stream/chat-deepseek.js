@@ -24,6 +24,12 @@ export async function onRequest(context) {
       });
     } catch (e) {
       console.log("++++++stream error", e);
+      return new Response(JSON.stringify({ error: e.message }), {
+        status: 500,
+        headers: {
+          "content-type": "application/json",
+        },
+      });
     }
     const textStream = result.textStream;
     console.log("check result stream", textStream);
