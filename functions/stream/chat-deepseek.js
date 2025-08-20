@@ -34,22 +34,22 @@ export async function onRequest(context) {
     const textStream = result.textStream;
     console.log("check result stream", textStream);
 
-    // const reader = textStream.getReader();
-    // console.log("++++++reader", reader);
-    // const { done, value } = await reader.read();
-    // // reader.releaseLock();
-    // console.log("++++++hasReadableStreamData", done, value);
-    // return new Response(textStream);
-    return new Response(
-      textStream.pipeThrough(new TextEncoderStream()),
-      {
-        headers: {
-          'Content-Type': 'text/plain; charset=utf-8',
-          'Cache-Control': 'no-cache',
-          'Connection': 'keep-alive',
-        }
-      }
-    );
+    const reader = textStream.getReader();
+    console.log("++++++reader", reader);
+    const { done, value } = await reader.read();
+    // reader.releaseLock();
+    console.log("++++++hasReadableStreamData", done, value);
+    return new Response(textStream);
+    // return new Response(
+    //   textStream.pipeThrough(new TextEncoderStream()),
+    //   {
+    //     headers: {
+    //       'Content-Type': 'text/plain; charset=utf-8',
+    //       'Cache-Control': 'no-cache',
+    //       'Connection': 'keep-alive',
+    //     }
+    //   }
+    // );
 
 
     // return new Response(JSON.stringify({ text: '123' }));
