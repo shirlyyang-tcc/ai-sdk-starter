@@ -94,16 +94,17 @@ const runStreamDemo = async () => {
     // Display results
     console.log('received stream content...', streamContent)
     console.log("Stream processing completed successfully!");
+    return streamContent;
 
   } catch (error) {
     console.error("Error processing stream:", error);
   }
 };
 
-export function onRequest(context) {
+export async function onRequest(context) {
   try {
-    runStreamDemo();
-    return new Response("test-finished");
+    const res = await runStreamDemo();
+    return new Response("test-finished" + res);
   } catch (error) {
     console.error("Error processing stream:", error);
     return new Response("test-error" + error.message, { status: 500 });
