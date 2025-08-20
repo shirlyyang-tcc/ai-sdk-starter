@@ -1,3 +1,5 @@
+import "../utils/text-stream";
+
 // Fixed version of the stream processing functions
 const enqueue = (stream) => {
   return stream.pipeThrough(
